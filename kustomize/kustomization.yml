@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - base
+
+images:
+  - name: frontend-service
+    newName: ghcr.io/kunievakateryna/anime-react-redux-app
+    newTag: latest
+  - name: anime-api-service
+    newName: ghcr.io/kunievakateryna/anime-spring-rest-api
+    newTag: latest
+  - name: episode-api-service
+    newName: ghcr.io/kunievakateryna/anime-node-js-rest-api
+    newTag: latest
+  - name: email-service
+    newName: ghcr.io/kunievakateryna/email-service-rabbitmq-elasticsearch
+    newTag: latest

@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: anime-project
+
+resources:
+  # Namespace
+  - namespace.yml
+
+  # Infrastructure (databases)
+  - postgresql
+  - mongodb
+  - rabbitmq
+  - elasticsearch
+
+  # Services
+  - anime-api
+  - episode-api
+  - email-service
+  - frontend
+
+  # Ingress (external access)
+  - ingress
