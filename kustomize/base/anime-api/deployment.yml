@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anime-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anime-api
+  template:
+    metadata:
+      labels:
+        app: anime-api
+    spec:
+      containers:
+        - name: anime-api
+          image: anime-api-service:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: "postgresql-service"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "anime"
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secret
+                  key: password
+            - name: RABBITMQ_HOST
+              value: "rabbitmq-service"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30

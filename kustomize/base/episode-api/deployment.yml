@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: episode-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: episode-api
+  template:
+    metadata:
+      labels:
+        app: episode-api
+    spec:
+      containers:
+        - name: episode-api
+          image: episode-api-service:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "300m"
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: EXPRESS_HOST
+              value: "0.0.0.0"
+            - name: EXPRESS_PORT
+              value: "3000"
+            - name: MONGO_URI
+              value: "mongodb://root:example@mongodb-service:27017/anime_db?authSource=admin"
+            - name: ANIME_API_URL
+              value: "http://anime-api-service:8080/api/anime"
