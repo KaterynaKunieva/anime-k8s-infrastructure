@@ -140,6 +140,15 @@ jobs:
               -n ${{ env.NAMESPACE }}
           fi
 
+          # Mail secret
+          if ! kubectl get secret mail-secret -n ${{ env.NAMESPACE }} &> /dev/null; then
+            kubectl create secret generic mail-secret \
+              --from-literal=username="user" \
+              --from-literal=password="${{ secrets.MAIL_PASSWORD }}" \
+              --from-literal=admin-email="admin@example.com" \
+              -n ${{ env.NAMESPACE }}
+          fi
+
       - name: Deploy to GKE
         run: |
           kubectl apply -k kustomize/
