@@ -175,18 +175,19 @@ jobs:
         run: |
           SERVICES="${{ steps.params.outputs.services }}"
           NS=${{ env.NAMESPACE }}
+          $TIMEOUT="300s"
 
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"anime-api"* ]]; then
-            kubectl rollout status deployment/anime-api -n $NS --timeout=120s || true
+            kubectl rollout status deployment/anime-api -n $NS --timeout=$TIMEOUT
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"episode-api"* ]]; then
-            kubectl rollout status deployment/episode-api -n $NS --timeout=120s || true
+            kubectl rollout status deployment/episode-api -n $NS --timeout=$TIMEOUT
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"email-service"* ]]; then
-            kubectl rollout status deployment/email-service -n $NS --timeout=120s || true
+            kubectl rollout status deployment/email-service -n $NS --timeout=$TIMEOUT
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"frontend"* ]]; then
-            kubectl rollout status deployment/frontend -n $NS --timeout=120s || true
+            kubectl rollout status deployment/frontend -n $NS --timeout=$TIMEOUT
           fi
 
       - name: Get deployment status
