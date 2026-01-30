@@ -6,17 +6,17 @@ resources:
 
 images:
 - name: anime-api-service
-  newName: ghcr.io/KaterynaKunieva/anime-spring-rest-api
+  newName: ghcr.io/katerynakunieva/anime-spring-rest-api
   newTag: latest
 - name: email-service
   newName: ghcr.io/kunievakateryna/email-service-rabbitmq-elasticsearch
   newTag: latest
 - name: email-service-service
-  newName: ghcr.io/KaterynaKunieva/email-service-rabbitmq-elasticsearch
+  newName: ghcr.io/katerynakunieva/email-service-rabbitmq-elasticsearch
   newTag: latest
 - name: episode-api-service
-  newName: ghcr.io/KaterynaKunieva/anime-node-js-rest-api
+  newName: ghcr.io/katerynakunieva/anime-node-js-rest-api
   newTag: latest
 - name: frontend-service
-  newName: ghcr.io/KaterynaKunieva/anime-react-redux-app
+  newName: ghcr.io/katerynakunieva/anime-react-redux-app
   newTag: latest
