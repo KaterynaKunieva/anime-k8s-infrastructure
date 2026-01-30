@@ -135,7 +135,7 @@ jobs:
           # RabbitMQ secret
           if ! kubectl get secret rabbitmq-secret -n ${{ env.NAMESPACE }} &> /dev/null; then
             kubectl create secret generic rabbitmq-secret \
-              --from-literal=username=root \
+              --from-literal=username=rabbit \
               --from-literal=password="${{ secrets.RABBITMQ_PASSWORD }}" \
               -n ${{ env.NAMESPACE }}
           fi

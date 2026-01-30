@@ -59,10 +59,6 @@ echo "Creating mail-secret..."
 kubectl create secret generic mail-secret \
   --from-literal=username="$MAIL_USER" \
   --from-literal=password="$MAIL_PASSWORD" \
+  --from-literal=admin-email="$ADMIN_EMAIL" \
   -n "$NAMESPACE" \
   --dry-run=client -o yaml | kubectl apply -f -
-
-# Admin email
-kubectl create secret generic mail-secret \
-  --from-literal=admin-email="$ADMIN_EMAIL" \
-  -n "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f -
