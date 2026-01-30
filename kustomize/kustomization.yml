@@ -9,7 +9,7 @@ images:
   newName: ghcr.io/katerynakunieva/anime-spring-rest-api
   newTag: latest
 - name: email-service
-  newName: ghcr.io/kunievakateryna/email-service-rabbitmq-elasticsearch
+  newName: ghcr.io/katerynakunieva/email-service-rabbitmq-elasticsearch
   newTag: latest
 - name: email-service-service
   newName: ghcr.io/katerynakunieva/email-service-rabbitmq-elasticsearch

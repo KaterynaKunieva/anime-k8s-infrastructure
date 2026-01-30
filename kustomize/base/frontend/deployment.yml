@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/kunievakateryna/anime-react-redux-app:latest
+          image: ghcr.io/katerynakunieva/anime-react-redux-app:latest
           imagePullPolicy: Always
           resources:
             limits:
