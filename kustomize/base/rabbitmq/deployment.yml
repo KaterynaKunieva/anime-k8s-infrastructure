@@ -25,11 +25,17 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "100m"
-          env:
+          env: 
             - name: RABBITMQ_DEFAULT_USER
-              value: "rabbit"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
             - name: RABBITMQ_DEFAULT_PASS
-              value: "s@cr3t"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
           volumeMounts:
             - name: rabbitmq-data
               mountPath: /var/lib/rabbitmq

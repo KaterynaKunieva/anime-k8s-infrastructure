@@ -12,6 +12,13 @@ spec:
     # Without host - works on any IP/domain
     - http:
         paths:
+          - path: /api/episode
+            pathType: Prefix
+            backend:
+              service:
+                name: episode-api-service
+                port:
+                  number: 3000
           - path: /api
             pathType: Prefix
             backend:
@@ -19,13 +26,6 @@ spec:
                 name: anime-api-service
                 port:
                   number: 8080
-          - path: /api/episodes
-            pathType: Prefix
-            backend:
-              service:
-                name: episode-api-service
-                port:
-                  number: 3000
           # Everything else is Frontend (React SPA)
           - path: /
             pathType: Prefix

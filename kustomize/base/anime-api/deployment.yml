@@ -26,6 +26,13 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: mail-secret
+                  key: admin-email
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
             - name: DB_HOST
               value: "postgresql-service"
             - name: DB_PORT
@@ -44,6 +51,16 @@ spec:
                   key: password
             - name: RABBITMQ_HOST
               value: "rabbitmq-service"
+            - name: RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
           readinessProbe:
             httpGet:
               path: /actuator/health

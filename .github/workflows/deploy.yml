@@ -131,6 +131,14 @@ jobs:
               --from-literal=password="${{ secrets.MONGO_PASSWORD }}" \
               -n ${{ env.NAMESPACE }}
           fi
+          
+          # RabbitMQ secret
+          if ! kubectl get secret rabbitmq-secret -n ${{ env.NAMESPACE }} &> /dev/null; then
+            kubectl create secret generic rabbitmq-secret \
+              --from-literal=username=root \
+              --from-literal=password="${{ secrets.RABBITMQ_PASSWORD }}" \
+              -n ${{ env.NAMESPACE }}
+          fi
 
       - name: Deploy to GKE
         run: |
@@ -175,13 +183,13 @@ jobs:
       - name: Get deployment status
         run: |
           echo "=== Deployed Services ==="
-          kubectl get services -n cloud-demo
+          kubectl get services -n ${{ env.NAMESPACE }}
           echo ""
           echo "=== Ingress ==="
-          kubectl get ingress -n cloud-demo
+          kubectl get ingress -n ${{ env.NAMESPACE }}
           echo ""
           echo "=== Pod Status ==="
-          kubectl get pods -n cloud-demo
+          kubectl get pods -n ${{ env.NAMESPACE }}
           echo ""
           echo "=== Deployment triggered by: ${{ steps.params.outputs.source_repo }} ==="
           echo "=== Image tag: ${{ steps.params.outputs.tag }} ==="
