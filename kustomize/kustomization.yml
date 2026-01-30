@@ -16,7 +16,7 @@ images:
   newTag: latest
 - name: episode-api-service
   newName: ghcr.io/katerynakunieva/anime-node-js-rest-api
-  newTag: latest
+  newTag: 2a643c822ec594e8cfa1ce78b501f83a6330cab9
 - name: frontend-service
   newName: ghcr.io/katerynakunieva/anime-react-redux-app
   newTag: latest
