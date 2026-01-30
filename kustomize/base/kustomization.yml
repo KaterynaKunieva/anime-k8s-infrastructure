@@ -7,11 +7,12 @@ resources:
   # Namespace
   - namespace.yml
 
-  # Infrastructure (databases)
+  # Infrastructure
   - postgresql
   - mongodb
+  - elasticsearch 
   - rabbitmq
-  - elasticsearch
+  - mailhog
 
   # Services
   - anime-api
