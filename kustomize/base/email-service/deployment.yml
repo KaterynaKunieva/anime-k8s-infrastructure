@@ -39,7 +39,7 @@ spec:
                   name: rabbitmq-secret
                   key: password
             - name: ELASTICSEARCH_URL
-              value: "http://elasticsearch-service:9200"
+              value: "elasticsearch-service:9200"
             - name: MAIL_HOST
               value: "mailhog-service"
             - name: MAIL_PORT
