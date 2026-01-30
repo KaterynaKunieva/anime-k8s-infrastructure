@@ -51,3 +51,14 @@ spec:
 
             - name: ANIME_API_URL
               value: "http://anime-api-service:8080/api/anime"
+          readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 20
