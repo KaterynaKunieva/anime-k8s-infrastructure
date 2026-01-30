@@ -13,10 +13,10 @@ images:
   newTag: latest
 - name: email-service-service
   newName: ghcr.io/katerynakunieva/email-service-rabbitmq-elasticsearch
-  newTag: 5e371823772711333377852070ac7e2e1d0e062e
+  newTag: latest
 - name: episode-api-service
   newName: ghcr.io/katerynakunieva/anime-node-js-rest-api
-  newTag: 2a643c822ec594e8cfa1ce78b501f83a6330cab9
+  newTag: latest
 - name: frontend-service
   newName: ghcr.io/katerynakunieva/anime-react-redux-app
   newTag: latest
