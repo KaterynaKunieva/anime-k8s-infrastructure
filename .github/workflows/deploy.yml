@@ -55,7 +55,7 @@ jobs:
         id: params
         run: |
           # Default owner (can be overridden by repository_dispatch)
-          OWNER_LC=$(echo "${{ secrets.IMAGE_OWNER || github.repository_owner }}")
+          OWNER_LC=$(echo "${{ secrets.IMAGE_OWNER || github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           echo "owner=${OWNER_LC}" >> $GITHUB_OUTPUT
 
           if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
