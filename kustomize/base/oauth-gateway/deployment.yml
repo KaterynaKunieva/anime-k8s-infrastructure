@@ -36,6 +36,8 @@ spec:
                 secretKeyRef:
                   name: google-oauth-secret
                   key: client-secret
+            - name: REDIRECT_BASE_URL
+              value: "http://${INGRESS_HOST}"
           readinessProbe:
             httpGet:
               path: /actuator/health

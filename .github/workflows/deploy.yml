@@ -95,6 +95,10 @@ jobs:
             kustomize edit set image frontend-service=${{ env.REGISTRY }}/${OWNER}/anime-react-redux-app:${TAG}
           fi
 
+          if [[ "$SERVICES" == "all" || "$SERVICES" == *"gateway"* ]]; then
+            kustomize edit set image gateway-service=${{ env.REGISTRY }}/${OWNER}/anime-oauth-gateway:${TAG}
+          fi
+
       - name: Install nginx-ingress controller if not exists
         run: |
           if ! kubectl get namespace ingress-nginx &> /dev/null; then
@@ -149,8 +153,18 @@ jobs:
               -n ${{ env.NAMESPACE }}
           fi
 
+          # Google OAuth secret
+          if ! kubectl get secret google-oauth-secret -n ${{ env.NAMESPACE }} &> /dev/null; then
+            kubectl create secret generic google-oauth-secret \
+              --from-literal=client-id="${{ secrets.GOOGLE_CLIENT_ID }}" \
+              --from-literal=client-secret="${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+              -n ${{ env.NAMESPACE }}
+          fi
+
       - name: Deploy to GKE
-        run: |
+        run: | 
+          export INGRESS_HOST="${{ secrets.INGRESS_IP }}.nip.io" 
+          envsubst '${INGRESS_HOST}' < kustomize/deployment.yml > kustomize/deployment.yml.tmp && mv kustomize/deployment.yml.tmp kustomize/deployment.yml
           kubectl apply -k kustomize/
 
       - name: Restart deployments to pick up new images
@@ -170,6 +184,9 @@ jobs:
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"frontend"* ]]; then
             kubectl rollout restart deployment/frontend -n $NS
           fi
+          if [[ "$SERVICES" == "all" || "$SERVICES" == *"gateway"* ]]; then
+            kubectl rollout restart deployment/gateway -n $NS
+          fi
 
       - name: Wait for rollout
         run: |
@@ -187,6 +204,9 @@ jobs:
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"frontend"* ]]; then
             kubectl rollout status deployment/frontend -n $NS --timeout=300s || true
+          fi
+          if [[ "$SERVICES" == "all" || "$SERVICES" == *"gateway"* ]]; then
+            kubectl rollout status deployment/gateway -n $NS --timeout=300s || true
           fi
 
       - name: Get deployment status

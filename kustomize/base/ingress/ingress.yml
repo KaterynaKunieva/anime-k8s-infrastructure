@@ -9,8 +9,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    # Without host - works on any IP/domain
-    - http:
+    - host: ${INGRESS_HOST} 
+      http:
         paths:
           - path: /api
             pathType: Prefix
