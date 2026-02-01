@@ -14,6 +14,9 @@ resources:
   - rabbitmq
   - mailhog
 
+  # Gateway
+  - gateway
+
   # Services
   - anime-api
   - episode-api
