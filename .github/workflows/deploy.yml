@@ -189,7 +189,7 @@ jobs:
             kubectl rollout restart deployment/frontend -n $NS
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"gateway"* ]]; then
-            kubectl rollout restart deployment/gateway -n $NS
+            kubectl rollout restart deployment/gateway-service -n $NS
           fi
 
       - name: Wait for rollout
@@ -210,7 +210,7 @@ jobs:
             kubectl rollout status deployment/frontend -n $NS --timeout=300s || true
           fi
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"gateway"* ]]; then
-            kubectl rollout status deployment/gateway -n $NS --timeout=300s || true
+            kubectl rollout status deployment/gateway-service -n $NS --timeout=300s || true
           fi
 
       - name: Get deployment status
