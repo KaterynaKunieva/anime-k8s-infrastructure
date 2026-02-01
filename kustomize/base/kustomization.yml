@@ -15,7 +15,7 @@ resources:
   - mailhog
 
   # Gateway
-  - gateway
+  - oauth-gateway
 
   # Services
   - anime-api
