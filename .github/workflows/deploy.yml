@@ -163,8 +163,12 @@ jobs:
 
       - name: Deploy to GKE
         run: | 
-          export INGRESS_HOST="${{ secrets.INGRESS_IP }}.nip.io" 
-          envsubst '${INGRESS_HOST}' < kustomize/deployment.yml > kustomize/deployment.yml.tmp && mv kustomize/deployment.yml.tmp kustomize/deployment.yml
+          export INGRESS_HOST="${{ secrets.INGRESS_IP }}.nip.io"  
+          
+          envsubst '${INGRESS_HOST}' < kustomize/base/ingress/ingress.yaml > kustomize/base/ingress/ingress.yaml.tmp && mv kustomize/base/ingress/ingress.yaml.tmp kustomize/base/ingress/ingress.yaml
+          
+          envsubst '${INGRESS_HOST}' < kustomize/base/oauth-gateway/deployment.yml > kustomize/base/oauth-gateway/deployment.yml.tmp && mv kustomize/base/oauth-gateway/deployment.yml.tmp kustomize/base/oauth-gateway/deployment.yml
+          
           kubectl apply -k kustomize/
 
       - name: Restart deployments to pick up new images
