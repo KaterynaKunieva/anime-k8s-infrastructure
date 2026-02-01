@@ -22,4 +22,4 @@ images:
   newTag: latest
 - name: gateway-service
   newName: ghcr.io/katerynakunieva/anime-oauth-gateway
-  newTag: latest
+  newTag: da3c7698feed6e0b4deaa5ba40b7ece364634d33
