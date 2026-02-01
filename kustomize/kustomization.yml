@@ -19,7 +19,7 @@ images:
   newTag: latest
 - name: frontend-service
   newName: ghcr.io/katerynakunieva/anime-react-redux-app
-  newTag: 223af3be3c40d290094171f145c75740e1d6af38
+  newTag: 921b0e24338697ec13e9d66149ad99b83b55ba10
 - name: gateway-service
   newName: ghcr.io/katerynakunieva/anime-oauth-gateway
   newTag: 59ea7ae8ef3538bb993be649f115d7cdb3ce9518
