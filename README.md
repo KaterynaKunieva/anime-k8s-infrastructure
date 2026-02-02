@@ -8,7 +8,7 @@ It manages production deployment to Google Cloud Platform (GCP) using Google Kub
 System follows a microservices architecture pattern, consisting of the following components:
 
 - [React Redux App SPA](https://github.com/KaterynaKunieva/anime-react-redux-app)
-- [Spring Boot Anime & Author API](https://github.com/KaterynaKunieva/anime-spring-rest-api)
+- [Spring Boot Anime & Author REST API](https://github.com/KaterynaKunieva/anime-spring-rest-api)
 - [Node.js Episodes REST API](https://github.com/KaterynaKunieva/anime-node-js-rest-api)
 - [Spring Boot Email Service (RabbitMQ & Elasticsearch)](https://github.com/KaterynaKunieva/email-service-rabbitmq-elasticsearch)
 - [Spring Boot Google OAuth2 Gateway](https://github.com/KaterynaKunieva/anime-oauth-gateway)
