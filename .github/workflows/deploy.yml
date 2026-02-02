@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       services:
-        description: 'Services to deploy (comma-separated: anime-api,episode-api,email-service,frontend or all)'
+        description: 'Services to deploy (comma-separated: anime-api,episode-api,email-service,frontend,gateway or all)'
         required: true
         default: 'all'
       image_tag:
@@ -88,7 +88,7 @@ jobs:
           fi
 
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"email-service"* ]]; then
-            kustomize edit set image email-service-service=${{ env.REGISTRY }}/${OWNER}/email-service-rabbitmq-elasticsearch:${TAG}
+            kustomize edit set image email-service=${{ env.REGISTRY }}/${OWNER}/email-service-rabbitmq-elasticsearch:${TAG}
           fi
 
           if [[ "$SERVICES" == "all" || "$SERVICES" == *"frontend"* ]]; then
